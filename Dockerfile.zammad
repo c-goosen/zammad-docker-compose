@@ -28,7 +28,7 @@ RUN apk add --update git && rm -rf /var/cache/apk/*
 
 # install zammad
 COPY install-zammad.sh /tmp
-RUN chmod +x /tmp/install-zammad.sh;/bin/sh -l -c /tmp/install-zammad.sh
+RUN chmod +x /tmp/install-zammad.sh;sleep 2;/bin/sh -l -c /tmp/install-zammad.sh
 
 # docker init
 COPY docker-entrypoint.sh /

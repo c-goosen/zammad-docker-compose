@@ -5,7 +5,7 @@ set -e
 echo "installing zammad..."
 
 # create zammad user
-adduser -H -h -D "${ZAMMAD_DIR}" -s /bin/bash zammad
+adduser -H -h -D "${ZAMMAD_DIR}" -s /bin/sh zammad
 
 # git clone zammad
 cd $(dirname "${ZAMMAD_DIR}")
