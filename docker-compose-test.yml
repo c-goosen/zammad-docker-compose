@@ -1,0 +1,33 @@
+version: '2'
+services:
+  elasticsearch:
+    image: monotek/zammad-docker-compose:elasticsearch
+    restart: always
+  nginx:
+    depends_on:
+      - zammad
+    image: monotek/zammad-docker-compose:nginx
+    links:
+      - zammad
+    ports:
+      - "80:80"
+    restart: always
+    volumes:
+      - data-zammad:/home/zammad
+  postgresql:
+    image: monotek/zammad-docker-compose:postgresql
+    restart: always
+  zammad:
+    image: monotek/zammad-docker-compose:zammad
+    links:
+      - postgresql
+      - elasticsearch
+    depends_on:
+      - postgresql
+      - elasticsearch
+    restart: always
+    volumes:
+      - data-zammad:/home/zammad
+volumes:
+  data-zammad:
+    driver: local
