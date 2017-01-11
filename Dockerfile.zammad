@@ -24,7 +24,7 @@ EXPOSE 3000
 EXPOSE 6042
 
 # install bash
-RUN apk add --update build-base git linux-headers postgresql-dev && rm -rf /var/cache/apk/*
+RUN apk add --update build-base git linux-headers nodejs postgresql-dev && rm -rf /var/cache/apk/*
 
 # install zammad
 COPY install-zammad.sh /tmp
