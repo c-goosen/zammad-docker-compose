@@ -2,8 +2,6 @@
 
 set -ex
 
-echo "installing zammad..."
-
 # create zammad user
 adduser -D -H -h "${ZAMMAD_DIR}" -s /bin/sh zammad
 
