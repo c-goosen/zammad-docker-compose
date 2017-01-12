@@ -14,8 +14,9 @@ if [ "$1" = 'zammad-railsserver' ]; then
 	bundle exec rake searchindex:rebuild
     fi
 
-    # delete logs & pids
+    # delete logs
     find ${ZAMMAD_DIR}/log -iname *.log -exec rm {} \;
+    find ${ZAMMAD_DIR}/tmp/pids -iname server.pid -exec rm {} \;
 
     # run zammad
     echo "starting zammad..."

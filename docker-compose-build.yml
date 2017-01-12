@@ -33,11 +33,10 @@ services:
     build:
       context: .
       dockerfile: containers/zammad/Dockerfile
+    command: echo 'Data-only container'
     depends_on:
       - elasticsearch
       - postgresql
-    entrypoint:
-      - "/bin/bash"
     links:
       - elasticsearch
       - postgresql
@@ -58,8 +57,8 @@ services:
       - postgresql
       - zammad
     restart: always
-    volumes:
-      - data-zammad:/home/zammad
+    volumes_from:
+      - zammad
 
   zammad-scheduler:
     build:
@@ -74,8 +73,8 @@ services:
       - postgresql
       - zammad
     restart: always
-    volumes:
-      - data-zammad:/home/zammad
+    volumes_from:
+      - zammad
 
   zammad-websocket:
     build:
@@ -88,8 +87,8 @@ services:
       - postgresql
       - zammad
     restart: always
-    volumes:
-      - data-zammad:/home/zammad
+    volumes_from:
+      - zammad
 
 volumes:
   data-zammad:
