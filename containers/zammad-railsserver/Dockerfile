@@ -24,7 +24,7 @@ EXPOSE 3000
 
 # docker init
 COPY containers/zammad-railsserver/docker-entrypoint.sh /
-RUN chown zammad:zammad /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
+#RUN chown zammad:zammad /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
 USER zammad
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["zammad"]
+CMD ["zammad-railsserver"]

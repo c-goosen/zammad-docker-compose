@@ -1,10 +1,13 @@
 version: '2'
+
 services:
+
   elasticsearch:
     build:
       context: .
       dockerfile: containers/elasticsearch/Dockerfile
     restart: always
+
   nginx:
     build:
       context: .
@@ -18,11 +21,13 @@ services:
     restart: always
     volumes:
       - data-zammad:/home/zammad
+
   postgresql:
     build:
       context: .
       dockerfile: containers/postgresql/Dockerfile
     restart: always
+
   zammad:
     build:
       context: .
@@ -36,6 +41,7 @@ services:
     restart: always
     volumes:
       - data-zammad:/home/zammad
+
   zammad-railsserver:
     build:
       context: .
@@ -51,6 +57,7 @@ services:
     restart: always
     volumes:
       - data-zammad:/home/zammad
+
   zammad-scheduler:
     build:
       context: .
@@ -64,6 +71,7 @@ services:
     restart: always
     volumes:
       - data-zammad:/home/zammad
+
   zammad-websocket:
     build:
       context: .
@@ -77,6 +85,7 @@ services:
     restart: always
     volumes:
       - data-zammad:/home/zammad
+
 volumes:
   data-zammad:
     driver: local

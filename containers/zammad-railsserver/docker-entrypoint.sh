@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$1" = 'zammad' ]; then
+if [ "$1" = 'zammad-railsserver' ]; then
 
     cd ${ZAMMAD_DIR}
     bundle exec rake db:migrate &> /dev/null
