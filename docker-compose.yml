@@ -1,19 +1,24 @@
 version: '2'
+
 services:
+
   elasticsearch:
     image: zammad/zammad-docker-compose:elasticsearch
     restart: always
+
   nginx:
     depends_on:
       - zammad
     image: zammad/zammad-docker-compose:nginx
     links:
-      - zammad
+      - zammad-railsserver
+      - zammad-websocket
     ports:
       - "80:80"
     restart: always
     volumes:
       - data-zammad:/home/zammad
+
   postgresql:
     image: zammad/zammad-docker-compose:postgresql
     restart: always
@@ -28,6 +33,7 @@ services:
     restart: always
     volumes:
       - data-zammad:/home/zammad
+
   zammad-railsserver:
     image: zammad/zammad-docker-compose:zammad-railsserver
     links:
@@ -41,17 +47,21 @@ services:
     restart: always
     volumes:
       - data-zammad:/home/zammad
+
   zammad-scheduler:
     image: zammad/zammad-docker-compose:zammad-scheduler
     links:
+      - elasticsearch
       - postgresql
       - zammad
     depends_on:
+      - elasticsearch
       - postgresql
       - zammad
     restart: always
     volumes:
       - data-zammad:/home/zammad
+
   zammad-websocket:
     image: zammad/zammad-docker-compose:zammad-websocket
     links:
@@ -63,6 +73,7 @@ services:
     restart: always
     volumes:
       - data-zammad:/home/zammad
+
 volumes:
   data-zammad:
     driver: local

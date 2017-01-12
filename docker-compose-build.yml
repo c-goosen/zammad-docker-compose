@@ -15,7 +15,8 @@ services:
     depends_on:
       - zammad
     links:
-      - zammad
+      - zammad-railsserver
+      - zammad-websocket
     ports:
       - "80:80"
     restart: always
@@ -63,9 +64,11 @@ services:
       context: .
       dockerfile: containers/zammad-scheduler/Dockerfile
     depends_on:
+      - elasticsearch
       - postgresql
       - zammad
     links:
+      - elasticsearch
       - postgresql
       - zammad
     restart: always
