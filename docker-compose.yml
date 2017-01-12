@@ -25,13 +25,7 @@ services:
 
   zammad:
     image: zammad/zammad-docker-compose:zammad
-    links:
-      - elasticsearch
-      - postgresql
-    depends_on:
-      - elasticsearch
-      - postgresql
-    restart: always
+    restart: on-failure
     volumes:
       - data-zammad:/home/zammad
 
@@ -46,8 +40,6 @@ services:
       - postgresql
       - zammad
     restart: always
-    volumes:
-      - data-zammad:/home/zammad
 
   zammad-scheduler:
     image: zammad/zammad-docker-compose:zammad-scheduler
@@ -60,8 +52,6 @@ services:
       - postgresql
       - zammad
     restart: always
-    volumes:
-      - data-zammad:/home/zammad
 
   zammad-websocket:
     image: zammad/zammad-docker-compose:zammad-websocket
@@ -72,8 +62,6 @@ services:
       - postgresql
       - zammad
     restart: always
-    volumes:
-      - data-zammad:/home/zammad
 
 volumes:
   data-zammad:
