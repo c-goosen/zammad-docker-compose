@@ -21,8 +21,6 @@ if [ "$1" = 'zammad' ]; then
     # run zammad
     echo "starting zammad..."
     echo "zammad will be accessable on http://localhost in some seconds"
-    bundle exec script/websocket-server.rb -b 0.0.0.0 start &
-    bundle exec script/scheduler.rb start &
 
     if [ "${RAILS_SERVER}" == "puma" ]; then
 	bundle exec puma -b tcp://0.0.0.0:3000 -e ${RAILS_ENV}

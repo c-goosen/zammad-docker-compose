@@ -3,12 +3,12 @@ services:
   elasticsearch:
     build:
       context: .
-      dockerfile: Dockerfile.elasticsearch
+      dockerfile: containers/elasticsearch/Dockerfile
     restart: always
   nginx:
     build:
       context: .
-      dockerfile: Dockerfile.nginx
+      dockerfile: containers/nginx/Dockerfile
     depends_on:
       - zammad
     links:
@@ -21,18 +21,59 @@ services:
   postgresql:
     build:
       context: .
-      dockerfile: Dockerfile.postgresql
+      dockerfile: containers/postgresql/Dockerfile
     restart: always
   zammad:
     build:
       context: .
-      dockerfile: Dockerfile.zammad
+      dockerfile: containers/zammad/Dockerfile
+    depends_on:
+      - elasticsearch
+      - postgresql
+    links:
+      - elasticsearch
+      - postgresql
+    restart: always
+    volumes:
+      - data-zammad:/home/zammad
+  zammad-railsserver:
+    build:
+      context: .
+      dockerfile: containers/zammad-railsserver/Dockerfile
+    depends_on:
+      - elasticsearch
+      - postgresql
+      - zammad
+    links:
+      - elasticsearch
+      - postgresql
+      - zammad
+    restart: always
+    volumes:
+      - data-zammad:/home/zammad
+  zammad-scheduler:
+    build:
+      context: .
+      dockerfile: containers/zammad-scheduler/Dockerfile
     depends_on:
       - postgresql
-      - elasticsearch
+      - zammad
     links:
       - postgresql
-      - elasticsearch
+      - zammad
+    restart: always
+    volumes:
+      - data-zammad:/home/zammad
+  zammad-websocket:
+    build:
+      context: .
+      dockerfile: containers/zammad-websocket/Dockerfile
+    depends_on:
+      - postgresql
+      - zammad
+    links:
+      - postgresql
+      - zammad
     restart: always
     volumes:
       - data-zammad:/home/zammad
