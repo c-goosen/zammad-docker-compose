@@ -39,7 +39,6 @@ services:
     links:
       - elasticsearch
       - postgresql
-    restart: always
     volumes:
       - data-zammad:/home/zammad
 
