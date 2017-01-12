@@ -41,7 +41,7 @@ services:
     links:
       - elasticsearch
       - postgresql
-    restart: never
+    restart: no
     volumes:
       - data-zammad:/home/zammad
 
