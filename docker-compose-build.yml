@@ -36,6 +36,8 @@ services:
     depends_on:
       - elasticsearch
       - postgresql
+    entrypoint:
+      - "/bin/bash"
     links:
       - elasticsearch
       - postgresql

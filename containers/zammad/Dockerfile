@@ -30,5 +30,3 @@ RUN chmod +x /tmp/install-zammad.sh;/bin/bash -l -c /tmp/install-zammad.sh
 RUN apt-get remove --purge -y git-core build-essential bzip2 libffi-dev libgdbm3 libssl-dev procps zlib1g-dev && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
-
-ENTRYPOINT ["/bin/bash"]
