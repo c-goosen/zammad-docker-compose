@@ -50,8 +50,6 @@ services:
       - postgresql
       - zammad
     restart: always
-    volumes:
-      - data-zammad:/home/zammad
 
   zammad-scheduler:
     build:
@@ -66,8 +64,6 @@ services:
       - postgresql
       - zammad
     restart: always
-    volumes:
-      - data-zammad:/home/zammad
 
   zammad-websocket:
     build:
@@ -82,8 +78,6 @@ services:
       - postgresql
       - zammad
     restart: always
-    volumes:
-      - data-zammad:/home/zammad
 
 volumes:
   data-zammad:
