@@ -74,9 +74,11 @@ services:
       context: .
       dockerfile: containers/zammad-websocket/Dockerfile
     depends_on:
+      - elasticsearch
       - postgresql
       - zammad
     links:
+      - elasticsearch
       - postgresql
       - zammad
     restart: always
