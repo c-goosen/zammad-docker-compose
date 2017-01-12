@@ -31,3 +31,4 @@ RUN apt-get remove --purge -y git-core build-essential bzip2 libffi-dev libgdbm3
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
+ENTRYPOINT ["/bin/bash"]
