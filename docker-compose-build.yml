@@ -33,14 +33,6 @@ services:
     build:
       context: .
       dockerfile: containers/zammad/Dockerfile
-    depends_on:
-      - elasticsearch
-      - postgresql
-    entrypoint:
-      - "/bin/bash"
-    links:
-      - elasticsearch
-      - postgresql
     restart: on-failure
     volumes:
       - data-zammad:/home/zammad
