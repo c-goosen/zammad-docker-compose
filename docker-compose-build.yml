@@ -20,8 +20,8 @@ services:
     ports:
       - "80:80"
     restart: always
-    volumes_from:
-      - zammad
+    volumes:
+      - data-zammad:/home/zammad
 
   postgresql:
     build:
@@ -36,10 +36,12 @@ services:
     depends_on:
       - elasticsearch
       - postgresql
+    entrypoint:
+      - "/bin/bash"
     links:
       - elasticsearch
       - postgresql
-    restart: always
+    restart: never
     volumes:
       - data-zammad:/home/zammad
 
@@ -51,14 +53,13 @@ services:
       - elasticsearch
       - postgresql
       - zammad
-    entrypoint: containers/zammad-railsserver/docker-entrypoint.sh
     links:
       - elasticsearch
       - postgresql
       - zammad
     restart: always
-    volumes_from:
-      - zammad
+    volumes:
+      - data-zammad:/home/zammad
 
   zammad-scheduler:
     build:
@@ -68,14 +69,13 @@ services:
       - elasticsearch
       - postgresql
       - zammad
-    entrypoint: containers/zammad-scheduler/docker-entrypoint.sh
     links:
       - elasticsearch
       - postgresql
       - zammad
     restart: always
-    volumes_from:
-      - zammad
+    volumes:
+      - data-zammad:/home/zammad
 
   zammad-websocket:
     build:
@@ -84,13 +84,12 @@ services:
     depends_on:
       - postgresql
       - zammad
-    entrypoint: containers/zammad-websocket/docker-entrypoint.sh
     links:
       - postgresql
       - zammad
     restart: always
-    volumes_from:
-      - zammad
+    volumes:
+      - data-zammad:/home/zammad
 
 volumes:
   data-zammad:
