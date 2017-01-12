@@ -22,6 +22,7 @@ services:
   postgresql:
     image: zammad/zammad-docker-compose:postgresql
     restart: always
+
   zammad:
     image: zammad/zammad-docker-compose:zammad
     links:
