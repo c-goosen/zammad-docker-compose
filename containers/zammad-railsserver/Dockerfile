@@ -23,8 +23,9 @@ LABEL org.label-schema.build-date="$BUILD_DATE" \
 EXPOSE 3000
 
 # docker init
+USER root
 COPY containers/zammad-railsserver/docker-entrypoint.sh /
-#RUN chown zammad:zammad /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
+RUN chown zammad:zammad /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
 USER zammad
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["zammad-railsserver"]

@@ -23,8 +23,9 @@ LABEL org.label-schema.build-date="$BUILD_DATE" \
 EXPOSE 6042
 
 # docker init
+USER root
 COPY containers/zammad-websocket/docker-entrypoint.sh /
-#RUN chown zammad:zammad /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
+RUN chown zammad:zammad /docker-entrypoint.sh && chmod +x /docker-entrypoint.sh
 USER zammad
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["zammad-websocket"]

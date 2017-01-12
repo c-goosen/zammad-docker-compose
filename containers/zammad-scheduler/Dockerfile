@@ -20,8 +20,9 @@ LABEL org.label-schema.build-date="$BUILD_DATE" \
       org.label-schema.docker.cmd="sysctl -w vm.max_map_count=262144;docker-compose up"
 
 # docker init
+USER root
 COPY containers/zammad-scheduler/docker-entrypoint.sh /
-#RUN chown zammad:zammad /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
+RUN chown zammad:zammad /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
 USER zammad
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["zammad-scheduler"]
