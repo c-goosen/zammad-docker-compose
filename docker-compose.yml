@@ -7,8 +7,6 @@ services:
     labels:
       io.rancher.container.pull_image: always
     restart: always
-    volumes:
-      - data-elasticsearch:/usr/share/elasticsearch
 
   nginx:
     depends_on:
@@ -30,8 +28,6 @@ services:
     labels:
       io.rancher.container.pull_image: always
     restart: always
-    volumes:
-      - data-postgresql:/var/lib/postgresql/data
 
   zammad:
     image: zammad/zammad-docker-compose:zammad
@@ -83,9 +79,5 @@ services:
     restart: always
 
 volumes:
-  data-elasticsearch:
-    driver: local
-  data-postgresql:
-    driver: local
   data-zammad:
     driver: local
