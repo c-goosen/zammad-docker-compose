@@ -83,6 +83,9 @@ services:
     restart: always
 
 volumes:
+  data-elasticsearch:
+    driver: local
+  data-postgresql:
+    driver: local
   data-zammad:
     driver: local
-
