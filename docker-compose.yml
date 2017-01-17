@@ -4,16 +4,12 @@ services:
 
   elasticsearch:
     image: zammad/zammad-docker-compose:elasticsearch
-    labels:
-      - io.rancher.container.pull_image: always
     restart: always
 
   nginx:
     depends_on:
       - zammad
     image: zammad/zammad-docker-compose:nginx
-    labels:
-      - io.rancher.container.pull_image: always
     links:
       - zammad-railsserver
       - zammad-websocket
@@ -25,14 +21,11 @@ services:
 
   postgresql:
     image: zammad/zammad-docker-compose:postgresql
-    labels:
-      - io.rancher.container.pull_image: always
     restart: always
 
   zammad:
     image: zammad/zammad-docker-compose:zammad
     labels:
-      - io.rancher.container.pull_image: always
       - io.rancher.container.start_once=true
     restart: on-failure
     volumes:
@@ -40,8 +33,6 @@ services:
 
   zammad-railsserver:
     image: zammad/zammad-docker-compose:zammad-railsserver
-    labels:
-      - io.rancher.container.pull_image: always
     links:
       - elasticsearch
       - postgresql
@@ -54,8 +45,6 @@ services:
 
   zammad-scheduler:
     image: zammad/zammad-docker-compose:zammad-scheduler
-    labels:
-      - io.rancher.container.pull_image: always
     links:
       - elasticsearch
       - postgresql
@@ -68,8 +57,6 @@ services:
 
   zammad-websocket:
     image: zammad/zammad-docker-compose:zammad-websocket
-    labels:
-      - io.rancher.container.pull_image: always
     links:
       - postgresql
       - zammad
