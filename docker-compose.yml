@@ -72,7 +72,7 @@ services:
 volumes:
   data-elasticsearch
     driver: local
-  data-postgres
+  data-postgresql
     driver: local
   data-zammad:
     driver: local
